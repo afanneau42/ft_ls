@@ -1,0 +1,2 @@
+R - Quand namefile < '.' ca bug
+  - ./ft_ls -lR /dev --> fd/4 bug
