@@ -110,7 +110,7 @@ void				init(t_ls *ls);
 void				set_info_to_zero(t_file *file);
 void				set_info_l_to_zero(t_file *file);
 
-void				check_params(char **argv, t_ls *ls);
+void				check_params(char ***argv, t_ls *ls);
 int					do_dir(char *name, t_ls ls, int printable);
 int					create_dir_struct(char *name, t_dir *dir, t_ls ls);
 void				fill_files(char *name, t_dir *dir, t_ls);

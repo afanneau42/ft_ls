@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include <stdio.h>
 
 void	sort_argv_time(char ***argv, t_ls ls)
 {
@@ -65,11 +66,13 @@ int		main(int argc, char **argv)
 	t_ls	ls;
 	int		i;
 	int		k;
+	int		bol;
 
+	bol = 0;
 	if (argc == 0)
 		return (0);
 	init(&ls);
-	check_params(argv, &ls);
+	check_params(&argv, &ls);
 	ls.first_dir < argc ? sort_argv(&argv, ls) : 0;
 	//print_file_arg();
 	i = ls.first_dir;
@@ -82,22 +85,33 @@ int		main(int argc, char **argv)
 	{
 		while (argv[k] && k >= ls.first_dir)
 		{
-			opendir(argv[k]);
-			if (errno == ENOTDIR)
-				ft_putendl(argv[k]);
+			if (argv[k][0] != '\0')
+			{
+				errno = 0;
+				opendir(argv[k]);
+				if (errno == ENOTDIR)
+				{
+					bol = 1;
+					ft_putendl(argv[k]);
+					argv[k][0] = '\0';
+				}
+			}
 			k += 1 - ls.flag.r * 2;
 		}
 		while (argv[i] && i >= ls.first_dir)
 		{
-			ft_putstr(argv[i]);
-			ft_putendl(":");
-			if (do_dir(argv[i], ls, 0))
+			if (argv[i][0] != '\0')
 			{
-				if (argv[i + 1 - ls.flag.r * 2] && i + 1 - ls.flag.r * 2 >= ls.first_dir)
+				if (bol == 1)
+				{
 					ft_putchar('\n');
+					bol = 0;
+				}
+				ft_putstr(argv[i]);
+				ft_putendl(":");
+				if (do_dir(argv[i], ls, 0))
+					bol = 1;
 			}
-			else if (errno == ENOTDIR)
-				ft_putendl(argv[i]);
 			i += 1 - ls.flag.r * 2;
 		}
 	}

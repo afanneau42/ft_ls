@@ -53,6 +53,7 @@ void	print_block(t_dir dir, t_ls ls)
 
 void	print_l(t_file file, t_dir dir)
 {
+//	ft_putnbr(dir.msize.ms_link);
 	ft_putstr(file.perm);
 	while (file.f_size.ms_link <= dir.msize.ms_link)
 	{
@@ -111,8 +112,8 @@ void	check_size(t_file *file, t_msize *msize)
 		file->f_size.ms_link++;
 	file->f_size.ms_usr = ft_strlen(file->usr);
 	file->f_size.ms_grp = ft_strlen(file->grp);
-	while (file->size / ft_pow(10, file->f_size.ms_blck) >= 1)
-		file->f_size.ms_blck++;
+		while (file->size / ft_pow(10, file->f_size.ms_blck) >= 1)
+				file->f_size.ms_blck++;
 	while (file->maj_nb / ft_pow(10, file->f_size.ms_majn) >= 1)
 		file->f_size.ms_majn++;
 	while (file->min_nb / ft_pow(10, file->f_size.ms_minn) >= 1)
@@ -129,7 +130,7 @@ void	check_size(t_file *file, t_msize *msize)
 		msize->ms_minn = file->f_size.ms_minn;
 	if (file->f_size.ms_blck > msize->ms_blck)
 		msize->ms_blck = file->f_size.ms_blck;
-	if (file->f_size.ms_majn + file->f_size.ms_minn + 2 > msize->ms_blck)
+	if (file->f_size.ms_majn + file->f_size.ms_minn + 2 > msize->ms_blck && (file->blk == 1 || file->chr == 1))
 		msize->ms_blck = file->f_size.ms_majn + file->f_size.ms_minn + 2;
 }
 
@@ -140,7 +141,9 @@ void	print(t_dir dir, t_ls ls)
 	i = 0;
 	while (i < dir.nb_files)
 	{
-		ls.flag.l == 1 ? check_size(&dir.files[i], &dir.msize) : 0;
+		if (ls.flag.a == 0 && dir.files[i].hidden == 1);
+		else
+			ls.flag.l == 1 ? check_size(&dir.files[i], &dir.msize) : 0;
 		i++;
 	}
 	i = 0;
@@ -186,7 +189,6 @@ int		do_dir(char *name, t_ls ls, int printable)
 		return (0);
 	if (printable)
 	{
-		ft_putchar('\0');
 		ft_putstr(name);		
 		ft_putendl(":");
 	}

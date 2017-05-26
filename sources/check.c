@@ -12,6 +12,26 @@
 
 #include "ft_ls.h"
 
+void	check_files(t_ls ls, char ***argv)
+{
+	int		i;
+
+	i = ls.first_dir;
+	while (argv[0][i] && argv[0][i][0])
+	{
+		opendir(argv[0][i]);
+		if (errno == ENOENT)
+		{
+			ft_putstr_fd("ft_ls: ", 2);
+			ft_putstr_fd(argv[0][i], 2);
+			ft_putstr_fd(": ", 2);
+			ft_putendl_fd(strerror(2), 2);
+			argv[0][i][0] = '\0';
+		}
+		i++;
+	}
+}
+
 void	usage(char option)
 {
 	ft_putstr_fd("ft_ls : illegal option -- ", 2);
@@ -43,19 +63,20 @@ void	check_flag(char *str, t_flag *flag)
 		usage(str[i]);
 }
 
-void	check_params(char **argv, t_ls *ls)
+void	check_params(char ***argv, t_ls *ls)
 {
 	int		i;
 
 	i = 1;
-	while (argv[i] && argv[i][0] == '-' && argv[i][1] != '\0')
+	while (argv[0][i] && argv[0][i][0] == '-' && argv[0][i][1] != '\0')
 	{
-		if (argv[i][1] && argv[i][1] == '-' && !argv[i][2])
+		if (argv[0][i][1] && argv[0][i][1] == '-' && !argv[0][i][2])
 			break;
-		check_flag(argv[i], &ls->flag);
+		check_flag(argv[0][i], &ls->flag);
 		i++;
 	}
 	ls->first_dir = i;
-	if (argv[i] && argv[i][0] && argv[i][1] && argv[i][0] == '-' && argv[i][1] == '-' && argv[i][2] == '\0')
+	if (argv[0][i] && argv[0][i][0] && argv[0][i][1] && argv[0][i][0] == '-' && argv[0][i][1] == '-' && argv[0][i][2] == '\0')
 		ls->first_dir++;
+	check_files(*ls, argv);
 }

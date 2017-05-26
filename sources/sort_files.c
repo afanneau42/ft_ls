@@ -78,6 +78,7 @@ void	sort_norm(t_dir *dir)
 
 void	sort_files(t_dir *dir, t_ls ls)
 {
-	ls.flag.t == 0 ? sort_norm(dir) : sort_time(dir);
+	sort_norm(dir);
+	ls.flag.t == 1 ? sort_time(dir) : 0;
 	ls.flag.r == 1 ? sort_rev(dir) : 0;
 }
