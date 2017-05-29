@@ -53,6 +53,9 @@ void	print_block(t_dir dir, t_ls ls)
 
 void	print_l(t_file file, t_dir dir)
 {
+	int		i;
+
+
 //	ft_putnbr(dir.msize.ms_link);
 	ft_putstr(file.perm);
 	while (file.f_size.ms_link <= dir.msize.ms_link)
@@ -89,11 +92,18 @@ void	print_l(t_file file, t_dir dir)
 	file.date = ctime(&file.time);
 	if (file.date[23] != '7')
 	{
+		i = 20;
 		file.date[10] = '\0';
-		file.date[24] = '\0';
 		ft_putstr(file.date + 4);
 		ft_putchar(' ');
-		ft_putstr(file.date + 19);
+		while (file.date[i] == ' ')
+			i++;
+		ft_putchar(' ');
+		while (file.date[i] && file.date[i] != ' ' && file.date[i] != '\n')
+		{
+			ft_putchar(file.date[i]);
+			i++;
+		}
 	}
 	else
 	{
@@ -112,8 +122,9 @@ void	check_size(t_file *file, t_msize *msize)
 		file->f_size.ms_link++;
 	file->f_size.ms_usr = ft_strlen(file->usr);
 	file->f_size.ms_grp = ft_strlen(file->grp);
-		while (file->size / ft_pow(10, file->f_size.ms_blck) >= 1)
+	while (file->size / ft_pow(10, file->f_size.ms_blck) >= 1)
 				file->f_size.ms_blck++;
+	file->size == 0 ? file->f_size.ms_blck++ : 0;
 	while (file->maj_nb / ft_pow(10, file->f_size.ms_majn) >= 1)
 		file->f_size.ms_majn++;
 	while (file->min_nb / ft_pow(10, file->f_size.ms_minn) >= 1)

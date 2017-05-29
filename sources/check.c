@@ -47,6 +47,8 @@ void	check_flag(char *str, t_flag *flag)
 	i = 1;
 	while (str[i] && (str[i] == 'l' || str[i] == 'R' || str[i] == 'a' || str[i] == 'r' || str[i] == 't' || str[i] == '1'))
 	{
+		if (str[i] == '1' && flag->l == 1)
+			flag->l--;
 		if (str[i] == 'l')
 			flag->l = 1;
 		if (str[i] == 'R')
