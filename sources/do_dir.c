@@ -196,13 +196,13 @@ int		do_dir(char *name, t_ls ls, int printable)
 	int		i;
 
 	i = 0;
-	if (create_dir_struct(name, &dir, ls) == 1)
-		return (0);
 	if (printable)
 	{
 		ft_putstr(name);		
 		ft_putendl(":");
 	}
+	if (create_dir_struct(name, &dir, ls) == 1)
+		return (0);
 	sort_files(&dir, ls);
 	if (ls.flag.l == 1)
 		print_block(dir, ls);

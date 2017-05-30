@@ -25,13 +25,15 @@ void	check_files(t_ls ls, char ***argv, t_args *args)
 {
 	int		i;
 	DIR 	*fd;
+	int		error;
 
 	i = ls.first_dir;
 	while (argv[0][i] && argv[0][i][0])
 	{
 		errno = 0;
 		fd = opendir(argv[0][i]);
-		if (errno == ENOENT)
+		error = errno;
+		if (error == ENOENT)
 		{
 			ft_putstr_fd("ft_ls: ", 2);
 			ft_putstr_fd(argv[0][i], 2);
@@ -41,12 +43,12 @@ void	check_files(t_ls ls, char ***argv, t_args *args)
 		}
 		else
 		{
-			if (fd == NULL)
+			if (error == ENOTDIR)
 				add_file(argv[0][i], &args->arg_file, ls);
 			else
 			{
 				add_file(argv[0][i], &args->arg_dir, ls);
-				closedir(fd);
+				error == 0 ? closedir(fd) : 0;
 			}
 		}
 		i++;

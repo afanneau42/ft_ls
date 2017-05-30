@@ -114,8 +114,8 @@ int	create_dir_struct(char *name, t_dir *dir, t_ls ls)
 	{
 		if (errno != ENOTDIR)
 		{
-			ft_putstr(name);
-			ft_putendl(":");
+			//ft_putstr(name);
+			//ft_putendl(":");
 			ft_putstr_fd("ft_ls : ", 2);
 			ft_putendl_fd(strerror(error), 2);
 		}

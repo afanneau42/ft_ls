@@ -110,11 +110,9 @@ int		main(int argc, char **argv)
 	while (i < args.arg_dir.nb_files)
 	{
 		if (argc - ls.first_dir != 1)
-		{
-			ft_putstr(args.arg_dir.files[i].name);
-			ft_putendl(":");
-		}
-		do_dir(args.arg_dir.files[i].name, ls, 0);
+			do_dir(args.arg_dir.files[i].name, ls, 1);
+		else
+			do_dir(args.arg_dir.files[i].name, ls, 0);
 		if (i + 1 < args.arg_dir.nb_files)
 			ft_putchar('\n');
 		i++;
