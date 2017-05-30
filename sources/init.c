@@ -12,6 +12,17 @@
 
 #include "ft_ls.h"
 
+void	msize_to_zero(t_msize *s)
+{
+	s->ms_link = 0;
+	s->ms_usr = 0;
+	s->ms_grp = 0;
+	s->ms_blck = 0;
+	s->ms_date = 0;
+	s->ms_majn = 0;
+	s->ms_minn = 0;
+}
+
 void	set_info_l_to_zero(t_file *file)
 {
 	int		i;
@@ -38,15 +49,10 @@ void	set_info_to_zero(t_file *file)
 	file->sock = 0;
 	file->hidden = 0;
 	file->time = 0;
-	file->f_size.ms_link = 0;
-	file->f_size.ms_usr = 0;
-	file->f_size.ms_grp = 0;
-	file->f_size.ms_blck = 0;
-	file->f_size.ms_majn = 0;
-	file->f_size.ms_minn = 0;
+	msize_to_zero(&file->f_size);
 }
 
-void	init(t_ls *ls)
+void	init(t_ls *ls, t_args *args, int argc)
 {
 	ls->flag.l = 0;
 	ls->flag.R = 0;
@@ -54,4 +60,10 @@ void	init(t_ls *ls)
 	ls->flag.r = 0;
 	ls->flag.t = 0;
 	ls->first_dir = 0;
+	args->arg_file.nb_files = 0;
+	args->arg_dir.nb_files = 0;
+	args->arg_file.files = malloc(sizeof(t_file) * argc);
+	args->arg_dir.files = malloc(sizeof(t_file) * argc);
+	msize_to_zero(&args->arg_file.msize);
+	msize_to_zero(&args->arg_file.msize);
 }

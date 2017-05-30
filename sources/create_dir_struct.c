@@ -48,7 +48,10 @@ void	get_file_info(char *name, t_file *file, t_ls ls)
 {
 	t_stat	buf;
 
-	file->path = create_path(name, file->name);
+	if (name)
+		file->path = create_path(name, file->name);
+	else
+		file->path = ft_strdup(file->name);
 	set_info_to_zero(file);
 	lstat(file->path, &buf);
 	if (S_ISLNK(buf.st_mode))

@@ -12,14 +12,25 @@
 
 #include "ft_ls.h"
 
-void	check_files(t_ls ls, char ***argv)
+void	add_file(char *name, t_dir *dir, t_ls ls)
+{
+	set_info_to_zero(&dir->files[dir->nb_files]);
+	set_info_l_to_zero(&dir->files[dir->nb_files]);
+	dir->files[dir->nb_files].name = ft_strdup(name);
+	get_file_info(0, &dir->files[dir->nb_files], ls);
+	dir->nb_files++;
+}
+
+void	check_files(t_ls ls, char ***argv, t_args *args)
 {
 	int		i;
+	DIR 	*fd;
 
 	i = ls.first_dir;
 	while (argv[0][i] && argv[0][i][0])
 	{
-		opendir(argv[0][i]);
+		errno = 0;
+		fd = opendir(argv[0][i]);
 		if (errno == ENOENT)
 		{
 			ft_putstr_fd("ft_ls: ", 2);
@@ -27,6 +38,16 @@ void	check_files(t_ls ls, char ***argv)
 			ft_putstr_fd(": ", 2);
 			ft_putendl_fd(strerror(2), 2);
 			argv[0][i][0] = '\0';
+		}
+		else
+		{
+			if (fd == NULL)
+				add_file(argv[0][i], &args->arg_file, ls);
+			else
+			{
+				add_file(argv[0][i], &args->arg_dir, ls);
+				closedir(fd);
+			}
 		}
 		i++;
 	}
@@ -65,7 +86,7 @@ void	check_flag(char *str, t_flag *flag)
 		usage(str[i]);
 }
 
-void	check_params(char ***argv, t_ls *ls)
+void	check_params(char ***argv, t_ls *ls, t_args *args)
 {
 	int		i;
 
@@ -80,5 +101,6 @@ void	check_params(char ***argv, t_ls *ls)
 	ls->first_dir = i;
 	if (argv[0][i] && argv[0][i][0] && argv[0][i][1] && argv[0][i][0] == '-' && argv[0][i][1] == '-' && argv[0][i][2] == '\0')
 		ls->first_dir++;
-	check_files(*ls, argv);
+	
+	check_files(*ls, argv, args);
 }
