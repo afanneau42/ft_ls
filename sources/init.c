@@ -59,11 +59,14 @@ void	init(t_ls *ls, t_args *args, int argc)
 	ls->flag.a = 0;
 	ls->flag.r = 0;
 	ls->flag.t = 0;
+	ls->rand = 0;
 	ls->first_dir = 0;
 	args->arg_file.nb_files = 0;
 	args->arg_dir.nb_files = 0;
+	args->arg_error.nb_files = 0;
 	args->arg_file.files = malloc(sizeof(t_file) * argc);
 	args->arg_dir.files = malloc(sizeof(t_file) * argc);
+	args->arg_error.files = malloc(sizeof(t_file) * argc);
 	msize_to_zero(&args->arg_file.msize);
 	msize_to_zero(&args->arg_file.msize);
 }

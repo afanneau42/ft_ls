@@ -33,13 +33,11 @@ void	check_files(t_ls ls, char ***argv, t_args *args)
 		errno = 0;
 		fd = opendir(argv[0][i]);
 		error = errno;
-		if (error == ENOENT)
+		if (error != ENOTDIR && error != 0)
 		{
-			ft_putstr_fd("ft_ls: ", 2);
-			ft_putstr_fd(argv[0][i], 2);
-			ft_putstr_fd(": ", 2);
-			ft_putendl_fd(strerror(2), 2);
-			argv[0][i][0] = '\0';
+			args->arg_error.files[args->arg_error.nb_files].name = ft_strdup(argv[0][i]);
+			args->arg_error.files[args->arg_error.nb_files].nlink = error;
+			args->arg_error.nb_files++;
 		}
 		else
 		{
@@ -88,7 +86,21 @@ void	check_flag(char *str, t_flag *flag)
 		usage(str[i]);
 }
 
-void	check_params(char ***argv, t_ls *ls, t_args *args)
+void	check_input(char **argv, int argc)
+{
+	int		i;
+
+	i = 0;
+	while (argv[i] && argv[i][0])
+		i++;
+	if (argc != i)
+	{
+		ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
+		exit(1);
+	}
+}
+
+void	check_params(char ***argv, t_ls *ls, t_args *args, int argc)
 {
 	int		i;
 
@@ -103,6 +115,6 @@ void	check_params(char ***argv, t_ls *ls, t_args *args)
 	ls->first_dir = i;
 	if (argv[0][i] && argv[0][i][0] && argv[0][i][1] && argv[0][i][0] == '-' && argv[0][i][1] == '-' && argv[0][i][2] == '\0')
 		ls->first_dir++;
-	
+	check_input(*argv, argc);
 	check_files(*ls, argv, args);
 }

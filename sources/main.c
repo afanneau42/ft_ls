@@ -83,7 +83,7 @@ void	sort_argv(char ***argv, t_ls ls)
 		else
 			i++;
 	}
-	ls.flag.t == 1 ? sort_argv_time(argv, ls) : 0;
+//	ls.flag.t == 1 ? sort_argv_time(argv, ls) : 0;
 }
 
 int		main(int argc, char **argv)
@@ -91,22 +91,34 @@ int		main(int argc, char **argv)
 	t_ls	ls;
 	int		i;
 //	int		k;
-	int		bol;
 	t_args	args;
 
-	bol = 0;
 	if (argc == 0)
 		return (0);
 	init(&ls, &args, argc);
-	check_params(&argv, &ls, &args);
+//	sort_argv(&argv, ls);
+	check_params(&argv, &ls, &args, argc);
 	i = 0;
 	if (ls.first_dir == argc)
 		do_dir(".", ls, 0);
+	ls.rand = 1;
+	sort_files(&args.arg_error, ls);
+	ls.rand = 0;
 	sort_files(&args.arg_file, ls);
 	sort_files(&args.arg_dir, ls);
+	i = 0;
+	while (i < args.arg_error.nb_files)
+	{
+		ft_putstr_fd("ft_ls: ", 2);
+		ft_putstr_fd(args.arg_error.files[i].name, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(strerror(args.arg_error.files[i].nlink), 2);
+		i++;
+	}
 	print(args.arg_file, ls);
 	if (args.arg_dir.nb_files > 0 && args.arg_file.nb_files > 0)
 		ft_putchar('\n');
+	i = 0;
 	while (i < args.arg_dir.nb_files)
 	{
 		if (argc - ls.first_dir != 1)

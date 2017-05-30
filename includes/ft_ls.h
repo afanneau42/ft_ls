@@ -64,6 +64,8 @@ typedef struct		s_ls
 {
 	t_flag			flag;
 	int				first_dir;
+		
+	int				rand;
 
 }					t_ls;
 
@@ -108,6 +110,7 @@ typedef struct		s_dir
 
 typedef	struct		s_args
 {
+	t_dir			arg_error;
 	t_dir			arg_file;
 	t_dir			arg_dir;
 }					t_args;
@@ -119,7 +122,7 @@ void				set_info_to_zero(t_file *file);
 void				set_info_l_to_zero(t_file *file);
 void				msize_to_zero(t_msize *s);
 
-void				check_params(char ***argv, t_ls *ls, t_args *args);
+void				check_params(char ***argv, t_ls *ls, t_args *args, int argc);
 int					do_dir(char *name, t_ls ls, int printable);
 void				print(t_dir dir, t_ls ls);
 void				print_l(t_file file, t_dir dir);
