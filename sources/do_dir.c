@@ -38,6 +38,8 @@ void	print_block(t_dir dir, t_ls ls)
 	int		i;
 	long	blck;
 
+	if (dir.nb_files == 2 && ls.flag.a == 0)
+		return;
 	i = 0;
 	blck = 0;
 	while (i < dir.nb_files)
