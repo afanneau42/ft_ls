@@ -38,6 +38,27 @@ void	perm(t_stat buf, t_file *file)
 	buf.st_mode & S_IROTH ? file->perm[7] = 'r' : 0;
 	buf.st_mode & S_IWOTH ? file->perm[8] = 'w' : 0;
 	buf.st_mode & S_IXOTH ? file->perm[9] = 'x' : 0;
+	if (buf.st_mode & S_ISUID) 
+	{
+		if (ft_strncmp(file->perm + 1, "---", 3) == 0)
+			file->perm[3] = 'S';
+		else
+			file->perm[3] = 's';
+	}
+	if (buf.st_mode & S_ISGID) 
+	{
+		if (ft_strncmp(file->perm + 4, "---", 3) == 0)
+			file->perm[6] = 'S';
+		else
+			file->perm[6] = 's';
+	}
+	if (buf.st_mode & S_ISVTX) 
+	{
+		if (ft_strncmp(file->perm + 7, "---", 3) == 0)
+			file->perm[9] = 'T';
+		else
+			file->perm[9] = 't';
+	}
 	if (file->blk == 0 && file->chr == 0 && file->link == 0 && file->fifo == 0 && file->sock == 0 && file->perm[1] == 'r')
 	{
 		listxattr(file->path, 0, 0, 0) ? file->perm[10] = '@' : 0;
