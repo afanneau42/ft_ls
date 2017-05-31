@@ -15,20 +15,9 @@
 void	info_link(t_file *file)
 {
 	size_t	size;
-//	char	*tmp;
 
 	file->link_to = ft_strnew(1000);
 	size = readlink(file->path, file->link_to, 1000);
-/*	while (size % 1000 == 0)
-	{
-		tmp = ft_strnew(size + 1000);
-		ft_strcpy(tmp, file->link_to);
-		free(file->link_to);
-		file->link_to = tmp;
-		file->link_to = ft_strnew(size + 1000);
-		size = readlink(file->path, file->link_to, size + 1000);
-		free(tmp);
-	}*/
 	file->link = 1;
 }
 
@@ -102,6 +91,16 @@ void	fill_files(char *name, t_dir *dir, t_ls ls)
 	dir->msize.ms_minn = 0;
 }
 
+void	path_to_name(char *name)
+{
+	int	i;
+
+	i = ft_strlen(name);
+	while (i > 0 && name[i] != '/')
+		i--;
+	ft_putstr_fd(name + i + 1, 2);
+}
+
 int	create_dir_struct(char *name, t_dir *dir, t_ls ls)
 {
 	DIR			*fd_dir;
@@ -116,7 +115,9 @@ int	create_dir_struct(char *name, t_dir *dir, t_ls ls)
 		{
 			//ft_putstr(name);
 			//ft_putendl(":");
-			ft_putstr_fd("ft_ls : ", 2);
+			ft_putstr_fd("ft_ls: ", 2);
+			path_to_name(name);
+			ft_putstr_fd(": ", 2);
 			ft_putendl_fd(strerror(error), 2);
 		}
 		return (1);

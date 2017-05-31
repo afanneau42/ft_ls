@@ -59,12 +59,12 @@ void	perm(t_stat buf, t_file *file)
 		else
 			file->perm[9] = 't';
 	}
-	if (file->blk == 0 && file->chr == 0 && file->link == 0 && file->fifo == 0 && file->sock == 0 && file->perm[1] == 'r')
+/*	if (file->blk == 0 && file->chr == 0 && file->link == 0 && file->fifo == 0 && file->sock == 0 && file->perm[1] == 'r' && file->perm[2] == 'w')
 	{
 		listxattr(file->path, 0, 0, 0) ? file->perm[10] = '@' : 0;
 		(tmp = acl_get_file(file->path, ACL_TYPE_EXTENDED)) != NULL ? file->perm[10] = '+' : 0;
 		acl_free(tmp);
-	}
+	}*/
 }
 
 void	l_flag_info(t_file *file, t_ls ls, t_stat buf)

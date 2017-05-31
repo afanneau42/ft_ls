@@ -34,19 +34,26 @@ void	check_files(t_ls ls, char ***argv, t_args *args)
 		errno = 0;
 		fd = opendir(argv[0][i]);
 		error = errno;
-		if (error != ENOTDIR && error != 0)
+		lstat(argv[0][i], &buf);
+		if (S_ISLNK(buf.st_mode))
 		{
-			lstat(argv[0][i], &buf);
-			if (S_ISLNK(buf.st_mode))
-			{
+			if (ls.flag.l == 1)
 				add_file(argv[0][i], &args->arg_file, ls);
-			}
 			else
 			{
+				stat(argv[0][i], &buf);
+				if (S_ISDIR(buf.st_mode))
+					add_file(argv[0][i], &args->arg_dir, ls);
+				else
+					add_file(argv[0][i], &args->arg_file, ls);
+			}
+		}
+		else if (error != ENOTDIR && error != 0)
+		{
+				ft_putnbr(error);
 				args->arg_error.files[args->arg_error.nb_files].name = ft_strdup(argv[0][i]);
 				args->arg_error.files[args->arg_error.nb_files].nlink = error;
 				args->arg_error.nb_files++;
-			}
 		}
 		else
 		{

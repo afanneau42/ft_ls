@@ -57,8 +57,6 @@ void	print_l(t_file file, t_dir dir)
 {
 	int		i;
 
-
-//	ft_putnbr(dir.msize.ms_link);
 	ft_putstr(file.perm);
 	while (file.f_size.ms_link <= dir.msize.ms_link)
 	{
@@ -92,7 +90,7 @@ void	print_l(t_file file, t_dir dir)
 	}
 	ft_putchar(' ');
 	file.date = ctime(&file.time);
-	if (file.date[23] != '7')
+	if (file.time <= time(NULL) - 31536000 / 2 || file.time > time(NULL))
 	{
 		i = 20;
 		file.date[10] = '\0';
