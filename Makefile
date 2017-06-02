@@ -6,7 +6,7 @@
 #    By: afanneau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/06 15:10:35 by afanneau          #+#    #+#              #
-#    Updated: 2017/06/02 14:40:11 by afanneau         ###   ########.fr        #
+#    Updated: 2017/06/02 16:11:32 by afanneau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = ft_ls
 
 SOURCES =  sources/main.c \
 		   sources/check.c \
+		   sources/check_files.c \
 		   sources/init.c \
 		   sources/do_dir.c \
 		   sources/error.c \
@@ -23,6 +24,7 @@ SOURCES =  sources/main.c \
 
 OBJECTS =  main.o \
 		   check.o \
+		   check_files.o \
 		   init.o \
 		   do_dir.o \
 		   error.o \

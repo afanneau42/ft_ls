@@ -123,6 +123,7 @@ void				set_info_l_to_zero(t_file *file);
 void				msize_to_zero(t_msize *s);
 
 void				check_params(char ***argv, t_ls *ls, t_args *args, int argc);
+void				check_files(t_ls ls, char ***argv, t_args *args);
 int					do_dir(char *name, t_ls ls, int printable);
 void				print(t_dir dir, t_ls ls);
 void				print_l(t_file file, t_dir dir);

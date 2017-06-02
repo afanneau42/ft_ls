@@ -39,6 +39,7 @@ void	set_info_l_to_zero(t_file *file)
 	file->size = 0;
 	file->n_blck = 0;
 }
+
 void	set_info_to_zero(t_file *file)
 {
 	file->dir = 0;
