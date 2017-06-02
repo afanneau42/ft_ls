@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls.h                                               :+:      :+:    :+:   */
+/*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afanneau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 15:54:15 by afanneau          #+#    #+#             */
-/*   Updated: 2017/05/18 17:37:05 by afanneau         ###   ########.fr       */
+/*   Created: 2017/06/02 17:50:56 by afanneau          #+#    #+#             */
+/*   Updated: 2017/06/02 17:50:59 by afanneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_H
-# define LS_H
+#ifndef FT_LS_H
+# define FT_LS_H
 
-#include <dirent.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "../libft/libft.h"
-#include <dirent.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/xattr.h>
-#include <sys/stat.h>
-#include <pwd.h>
-#include <uuid/uuid.h>
-#include <grp.h>
-#include <sys/acl.h>
-#include <time.h>
-#include <errno.h>
-#include <string.h>
+# include <dirent.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include "../libft/libft.h"
+# include <dirent.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/xattr.h>
+# include <sys/stat.h>
+# include <pwd.h>
+# include <uuid/uuid.h>
+# include <grp.h>
+# include <sys/acl.h>
+# include <time.h>
+# include <errno.h>
+# include <string.h>
 
-#define MINORBITS       20
-#define MINORMASK       ((1U << MINORBITS) - 1)
-#define MAJOR(dev)      ((unsigned int) ((dev) >> MINORBITS))
-#define MINOR(dev)      ((unsigned int) ((dev) & MINORMASK))
+# define MINORBITS       20
+# define MINORMASK       ((1U << MINORBITS) - 1)
+# define MAJOR(dev)      ((unsigned int) ((dev) >> MINORBITS))
+# define MINOR(dev)      ((unsigned int) ((dev) & MINORMASK))
 
-typedef struct	dirent	t_dirent;
-typedef struct	stat	t_stat;
-typedef struct	passwd	t_passwd;
-typedef struct	group		t_group;
+typedef struct dirent	t_dirent;
+typedef struct stat		t_stat;
+typedef struct passwd	t_passwd;
+typedef struct group	t_group;
 
 typedef struct		s_msize
 {
@@ -54,7 +54,7 @@ typedef struct		s_msize
 typedef struct		s_flag
 {
 	int				l;
-	int				R;
+	int				rec;
 	int				a;
 	int				r;
 	int				t;
@@ -64,11 +64,8 @@ typedef struct		s_ls
 {
 	t_flag			flag;
 	int				first_dir;
-		
 	int				rand;
-
 }					t_ls;
-
 
 typedef	struct		s_file
 {
@@ -114,24 +111,24 @@ typedef	struct		s_args
 	t_dir			arg_file;
 	t_dir			arg_dir;
 }					t_args;
-/*
-**					INITIALISATION
-*/
+
 void				init(t_ls *ls, t_args *args, int argc);
 void				set_info_to_zero(t_file *file);
 void				set_info_l_to_zero(t_file *file);
 void				msize_to_zero(t_msize *s);
 
-void				check_params(char ***argv, t_ls *ls, t_args *args, int argc);
+void				check_params(char ***argv, t_ls *ls,
+	t_args *args, int argc);
 void				check_files(t_ls ls, char ***argv, t_args *args);
 int					do_dir(char *name, t_ls ls, int printable);
 void				print(t_dir dir, t_ls ls);
+void				print_block(t_dir dir, t_ls ls);
 void				print_l(t_file file, t_dir dir);
 int					create_dir_struct(char *name, t_dir *dir, t_ls ls);
 void				fill_files(char *name, t_dir *dir, t_ls ls);
 
 void				get_file_info(char *namefile, t_file *file, t_ls ls);
-void				l_flag_info(t_file *file, t_ls ls, t_stat buf);
+void				l_flag_info(t_file *file, t_stat buf);
 void				sort_files(t_dir *dir, t_ls ls);
 
 void				err(void);

@@ -56,7 +56,7 @@ void	set_info_to_zero(t_file *file)
 void	init(t_ls *ls, t_args *args, int argc)
 {
 	ls->flag.l = 0;
-	ls->flag.R = 0;
+	ls->flag.rec = 0;
 	ls->flag.a = 0;
 	ls->flag.r = 0;
 	ls->flag.t = 0;

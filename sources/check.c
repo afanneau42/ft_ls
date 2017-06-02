@@ -33,7 +33,7 @@ void	check_flag(char *str, t_flag *flag)
 		if (str[i] == 'l')
 			flag->l = 1;
 		if (str[i] == 'R')
-			flag->R = 1;
+			flag->rec = 1;
 		if (str[i] == 'a')
 			flag->a = 1;
 		if (str[i] == 'r')

@@ -6,7 +6,7 @@
 #    By: afanneau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/06 15:10:35 by afanneau          #+#    #+#              #
-#    Updated: 2017/06/02 16:11:32 by afanneau         ###   ########.fr        #
+#    Updated: 2017/06/02 17:48:49 by afanneau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SOURCES =  sources/main.c \
 		   sources/l_flag_info.c \
 		   sources/create_dir_struct.c \
 		   sources/fill_files.c \
+		   sources/print.c \
+		   sources/print_l.c \
 
 OBJECTS =  main.o \
 		   check.o \
@@ -33,6 +35,8 @@ OBJECTS =  main.o \
 		   l_flag_info.o \
 		   create_dir_struct.o \
 		   fill_files.o \
+		   print.o \
+		   print_l.o \
 
 all : $(NAME)
 

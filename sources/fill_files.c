@@ -46,7 +46,7 @@ void	get_file_info_2(t_file *file, t_ls ls, t_stat buf)
 		file->hidden = 1;
 	file->time = buf.st_mtimespec.tv_sec;
 	if (ls.flag.l == 1)
-		l_flag_info(file, ls, buf);
+		l_flag_info(file, buf);
 }
 
 void	get_file_info(char *name, t_file *file, t_ls ls)
