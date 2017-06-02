@@ -6,7 +6,7 @@
 #    By: afanneau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/06 15:10:35 by afanneau          #+#    #+#              #
-#    Updated: 2017/05/17 17:18:36 by afanneau         ###   ########.fr        #
+#    Updated: 2017/06/02 14:40:11 by afanneau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ all : $(NAME)
 $(NAME) :
 	make -C libft/ && make -C libft/ clean
 	gcc -Wall -Wextra -Werror -I libft/includes -c $(SOURCES) -Iincludes
-	gcc -o $(NAME) $(OBJECTS) -L libft/ -lft
+	gcc -g -o $(NAME) $(OBJECTS) -L libft/ -lft
 
 clean :
 	rm -f  $(OBJECTS)

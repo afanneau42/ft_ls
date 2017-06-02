@@ -50,7 +50,6 @@ void	check_files(t_ls ls, char ***argv, t_args *args)
 		}
 		else if (error != ENOTDIR && error != 0)
 		{
-				ft_putnbr(error);
 				args->arg_error.files[args->arg_error.nb_files].name = ft_strdup(argv[0][i]);
 				args->arg_error.files[args->arg_error.nb_files].nlink = error;
 				args->arg_error.nb_files++;
@@ -71,9 +70,9 @@ void	check_files(t_ls ls, char ***argv, t_args *args)
 
 void	usage(char option)
 {
-	ft_putstr_fd("ft_ls : illegal option -- ", 2);
+	ft_putstr_fd("ft_ls: illegal option -- ", 2);
 	ft_putchar_fd(option, 2);
-	ft_putendl_fd("\nusage : ft_ls [-Ralrt1] [file ...]", 2);
+	ft_putendl_fd("\nusage: ft_ls [-Ralrt1] [file ...]", 2);
 	exit(1);
 }
 
