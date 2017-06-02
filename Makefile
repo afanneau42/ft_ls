@@ -21,6 +21,7 @@ SOURCES =  sources/main.c \
 		   sources/sort_files.c \
 		   sources/l_flag_info.c \
 		   sources/create_dir_struct.c \
+		   sources/fill_files.c \
 
 OBJECTS =  main.o \
 		   check.o \
@@ -31,6 +32,7 @@ OBJECTS =  main.o \
 		   sort_files.o \
 		   l_flag_info.o \
 		   create_dir_struct.o \
+		   fill_files.o \
 
 all : $(NAME)
 

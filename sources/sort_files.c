@@ -29,7 +29,7 @@ void	sort_rev(t_dir *dir)
 	if (dir->nb_files == 2)
 	{
 		ft_swap_t(&dir->files[0], &dir->files[1]);
-		return;
+		return ;
 	}
 	else
 	{

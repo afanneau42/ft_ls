@@ -128,7 +128,7 @@ int					do_dir(char *name, t_ls ls, int printable);
 void				print(t_dir dir, t_ls ls);
 void				print_l(t_file file, t_dir dir);
 int					create_dir_struct(char *name, t_dir *dir, t_ls ls);
-void				fill_files(char *name, t_dir *dir, t_ls);
+void				fill_files(char *name, t_dir *dir, t_ls ls);
 
 void				get_file_info(char *namefile, t_file *file, t_ls ls);
 void				l_flag_info(t_file *file, t_ls ls, t_stat buf);
