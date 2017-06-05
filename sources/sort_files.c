@@ -6,7 +6,7 @@
 /*   By: afanneau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 13:41:11 by afanneau          #+#    #+#             */
-/*   Updated: 2017/05/18 16:52:21 by afanneau         ###   ########.fr       */
+/*   Updated: 2017/06/05 17:51:20 by afanneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,13 @@ void	sort_time(t_dir *dir)
 	{
 		if (dir->files[i].time > dir->files[i - 1].time)
 		{
-			ft_swap_t(&dir->files[i - 1], &dir->files[i]);
-			i = 1;
+			while (i >= 1 && dir->files[i].time > dir->files[i - 1].time)
+			{
+				ft_swap_t(&dir->files[i - 1], &dir->files[i]);
+				i--;
+			}
+			if (i == 0)
+				i++;
 		}
 		else
 			i++;
@@ -67,8 +72,13 @@ void	sort_norm(t_dir *dir)
 	{
 		if (ft_strcmp(dir->files[i - 1].name, dir->files[i].name) > 0)
 		{
-			ft_swap_t(&dir->files[i - 1], &dir->files[i]);
-			i = 1;
+			while (i >= 1 && ft_strcmp(dir->files[i - 1].name, dir->files[i].name) > 0)
+			{
+				ft_swap_t(&dir->files[i - 1], &dir->files[i]);
+				i--;
+			}
+			if (i == 0)
+				i++;
 		}
 		else
 			i++;
