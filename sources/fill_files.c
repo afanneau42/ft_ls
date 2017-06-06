@@ -6,7 +6,7 @@
 /*   By: afanneau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 16:54:26 by afanneau          #+#    #+#             */
-/*   Updated: 2017/06/05 17:05:37 by afanneau         ###   ########.fr       */
+/*   Updated: 2017/06/06 14:35:52 by afanneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	info_link(t_file *file)
 char	*create_path(char *dir_name, char *file_name)
 {
 	char	*path;
+
 
 	path = ft_strnew(ft_strlen(dir_name) + ft_strlen(file_name) + 1);
 	ft_strcat(path, dir_name);

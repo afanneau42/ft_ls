@@ -94,6 +94,7 @@ typedef	struct		s_file
 	char			*date;
 	long			n_blck;
 
+	int				dir_fail;
 	t_msize			f_size;
 }					t_file;
 

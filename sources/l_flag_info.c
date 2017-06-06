@@ -71,6 +71,14 @@ void	perm(t_stat buf, t_file *file)
 	fill_perm_str_extended(buf, file);
 }
 
+void	dir_fail(t_file *file)
+{
+		file->dir_fail = 1;
+		ft_putstr_fd("ft_ls: ", 2);
+		ft_putstr_fd(file->name, 2);
+		ft_putendl_fd(": No such file or directory", 2);
+}
+
 void	l_flag_info(t_file *file, t_stat buf)
 {
 	t_passwd	*pas;
@@ -80,6 +88,8 @@ void	l_flag_info(t_file *file, t_stat buf)
 	perm(buf, file);
 	file->nlink = buf.st_nlink;
 	pas = getpwuid(buf.st_uid);
+	if (pas == NULL)	
+		return(dir_fail(file));
 	file->usr = pas->pw_name;
 	grp = getgrgid(buf.st_gid);
 	file->grp = grp->gr_name;

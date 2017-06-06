@@ -6,7 +6,7 @@
 /*   By: afanneau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 16:51:00 by afanneau          #+#    #+#             */
-/*   Updated: 2017/06/05 17:03:23 by afanneau         ###   ########.fr       */
+/*   Updated: 2017/06/06 14:35:19 by afanneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int		create_dir_struct(char *name, t_dir *dir, t_ls ls)
 	DIR			*fd_dir;
 	int			error;
 
+	error = 0;
 	fd_dir = opendir(name);
-	error = errno;
+	error = errno;	
 	if (fd_dir == NULL)
 	{
 		if (errno != ENOTDIR)

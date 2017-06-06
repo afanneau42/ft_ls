@@ -6,7 +6,7 @@
 /*   By: afanneau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 16:16:55 by afanneau          #+#    #+#             */
-/*   Updated: 2017/06/05 17:12:01 by afanneau         ###   ########.fr       */
+/*   Updated: 2017/06/06 14:38:14 by afanneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ void	recur(t_dir dir, t_ls ls)
 	}
 }
 
+void	print_name(char *name)
+{
+	if (name[0] && name[1] && name[0] == '/' && name[1] == '/')
+		ft_putstr(name + 1);
+	else
+		ft_putstr(name);
+	ft_putendl(":");
+}
 int		do_dir(char *name, t_ls ls, int printable)
 {
 	t_dir	dir;
@@ -44,10 +52,7 @@ int		do_dir(char *name, t_ls ls, int printable)
 
 	i = 0;
 	if (printable)
-	{
-		ft_putstr(name);
-		ft_putendl(":");
-	}
+		print_name(name);
 	if (create_dir_struct(name, &dir, ls) == 1)
 		return (0);
 	sort_files(&dir, ls);

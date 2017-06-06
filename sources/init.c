@@ -50,6 +50,7 @@ void	set_info_to_zero(t_file *file)
 	file->sock = 0;
 	file->hidden = 0;
 	file->time = 0;
+	file->dir_fail = 0;
 	msize_to_zero(&file->f_size);
 }
 
