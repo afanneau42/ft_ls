@@ -54,14 +54,16 @@ void	print(t_dir dir, t_ls ls)
 	i = 0;
 	while (i < dir.nb_files)
 	{
-		if (!((ls.flag.a == 0 && dir.files[i].hidden == 1) || dir.files[i].dir_fail == 1))
+		if (!((ls.flag.a == 0 && dir.files[i].hidden == 1)
+			|| dir.files[i].dir_fail == 1))
 			ls.flag.l == 1 ? check_size(&dir.files[i], &dir.msize) : 0;
 		i++;
 	}
 	i = 0;
 	while (i < dir.nb_files)
 	{
-		if (ls.flag.a == 0 && dir.files[i].hidden == 0 && dir.files[i].dir_fail == 0)
+		if (ls.flag.a == 0 && dir.files[i].hidden == 0 &&
+			dir.files[i].dir_fail == 0)
 			ls.flag.l == 1 ? print_l(dir.files[i], dir) :
 				ft_putendl(dir.files[i].name);
 		else if (ls.flag.a == 1 && dir.files[i].dir_fail == 0)

@@ -43,7 +43,7 @@ int		create_dir_struct(char *name, t_dir *dir, t_ls ls)
 
 	error = 0;
 	fd_dir = opendir(name);
-	error = errno;	
+	error = errno;
 	if (fd_dir == NULL)
 	{
 		if (errno != ENOTDIR)

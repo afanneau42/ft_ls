@@ -25,7 +25,6 @@ char	*create_path(char *dir_name, char *file_name)
 {
 	char	*path;
 
-
 	path = ft_strnew(ft_strlen(dir_name) + ft_strlen(file_name) + 1);
 	ft_strcat(path, dir_name);
 	path[ft_strlen(dir_name)] = '/';

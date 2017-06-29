@@ -72,7 +72,8 @@ void	sort_norm(t_dir *dir)
 	{
 		if (ft_strcmp(dir->files[i - 1].name, dir->files[i].name) > 0)
 		{
-			while (i >= 1 && ft_strcmp(dir->files[i - 1].name, dir->files[i].name) > 0)
+			while (i >= 1 && ft_strcmp(dir->files[i - 1].name,
+				dir->files[i].name) > 0)
 			{
 				ft_swap_t(&dir->files[i - 1], &dir->files[i]);
 				i--;

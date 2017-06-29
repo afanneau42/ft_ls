@@ -45,6 +45,7 @@ void	print_name(char *name)
 		ft_putstr(name);
 	ft_putendl(":");
 }
+
 int		do_dir(char *name, t_ls ls, int printable)
 {
 	t_dir	dir;
